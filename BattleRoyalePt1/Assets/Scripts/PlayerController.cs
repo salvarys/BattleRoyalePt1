@@ -18,15 +18,10 @@ public class PlayerController : MonoBehaviourPun
     public int id;
     public Player photonPlayer;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
+        Move();
         if (Input.GetKeyDown(KeyCode.Space))
             TryJump();
     }
@@ -53,7 +48,9 @@ public class PlayerController : MonoBehaviourPun
         // shoot the raycast
         if (Physics.Raycast(ray, 1.5f))
             rig.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-    }
+    } 
+
+    [PunRPC]
     public void Initialize(Player player)
     {
         id = player.ActorNumber;
